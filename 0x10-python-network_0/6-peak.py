@@ -1,23 +1,25 @@
 #!/usr/bin/python3
-"""task 6 modele"""
+"""Find Peek Module."""
 
 
-def find_peak(list_of_integers):
-    """Return a peak in a list of unsorted integers."""
-    if list_of_integers == []:
-        return None
+def find_peak(arr):
+    """finds a peak in a list of unsorted integer."""
+    low = 0
+    size = len(arr)
+    r = size - 1
 
-    size = len(list_of_integers)
+    if not arr:
+        return
     if size == 1:
-        return list_of_integers[0]
-    elif size == 2:
-        return max(list_of_integers)
-
-    mid = int(size / 2)
-    peak = list_of_integers[mid]
-    if peak > list_of_integers[mid - 1] and peak > list_of_integers[mid + 1]:
-        return peak
-    elif peak < list_of_integers[mid - 1]:
-        return find_peak(list_of_integers[:mid])
-    else:
-        return find_peak(list_of_integers[mid + 1:])
+        return arr[0]
+    if arr[0] >= arr[1]:
+        return arr[0]
+    if arr[size - 1] >= arr[size - 2]:
+        return arr[size - 1]
+    while low < r:
+        m = low + (r - low) // 2
+        if arr[m] <= arr[m + 1]:
+            low = m + 1
+        else:
+            r = m
+    return arr[low] if low < len(arr) else arr[low - 1]
