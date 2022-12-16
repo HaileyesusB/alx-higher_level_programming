@@ -1,21 +1,16 @@
 #!/usr/bin/python3
-
-"""Fetch ALX SE Status Module."""
-import urllib.request
-
-
-def main():
-    """Fetch https://alx-intranet.hbtn.io/status."""
-    with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as res:
-        byte = res.read()
-        content = f"content: {byte}"
-        tc_type = f"type: {type(byte)}"
-        utf8 = f"utf8 content: {byte.decode()}"
-        output = "Body response:\n\t- {}\n\t- {}\n\t- {}".format(
-                tc_type, content, utf8)
-
-    print(output)
+"""A script that
+- fetches https://alx-intranet.hbtn.io/status.
+- uses urlib package
+"""
 
 
 if __name__ == '__main__':
-    main()
+    import urllib.request
+
+    with urllib.request.urlopen('https://alx-intranet.hbtn.io/status') as res:
+        content = res.read()
+        print("Body response:")
+        print("\t- type: {}".format(type(content)))
+        print("\t- content: {}".format(content))
+        print("\t- utf8 content: {}".format(content.decode('utf-8')))
